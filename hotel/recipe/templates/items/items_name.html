@@ -1,0 +1,9 @@
+{% if item_list %}
+    <ul>
+    {% for q in item_list %}
+        <li><a href="{% url 'recipe:item_name' %}">{{ q.item_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No items are available.</p>
+{% endif %}
