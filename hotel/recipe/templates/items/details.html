@@ -1,0 +1,14 @@
+{% if details_list %}
+    <ul>
+    {% for q in details_list %}
+        <li><a href="% {recipe:details} %"><h3>Itemname</h3>{{ q.item_name}}  </a>
+        <li><a href="% {recipe:details} %"><h3>Ingredients</h3>{{q.ingredients}}</a>
+        <li><a href="% {recipe:details} %"><h3>Process</h3>{{q.process}}</a>
+        </li>
+
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No items are available.</p>
+{% endif %}
