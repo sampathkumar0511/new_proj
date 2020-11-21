@@ -16,17 +16,18 @@ def items_name(request):
     #return HttpResponse(template.render(context,request))
     return render(request,'items/items_name.html',context)
 
-def item_details(request ):
+def item_details(request, id):
     #details_list = get_object_or_404(Recipe)
-    details_list = Recipe.objects.all().values('item_name','ingredients','process')
-    context = {
-        'details_list': details_list,
-
-    }
+    details_list = get_object_or_404(Recipe,pk=id)
     #return HttpResponse(render(context,request))
-    return render(request,'items/details.html',context)
+    return render(request,'items/details.html', {'details_list':details_list})
 
 def add_item(request):
-    add_item = get_object_or_404(Recipe)
-    #return HttpResponseRedirect (reverse('recipe:item_name'))
-    return render(request,'items/add_item.html',add_item)
+    if request.method == 'POST':
+        Recipe.objects.create(
+            item_name = request.POST["item_name"],
+            ingredients = request.POST["ingredients"],
+            process = request.POST["process"],
+        )
+        return HttpResponseRedirect(reverse('recipe:item_name'))
+    return render(request, 'items/add_item.html')
